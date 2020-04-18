@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public GameOver gameOver;
+    public Overlay titleScreen;
+    public Overlay gameOver;
+
+    public State currentState = State.Initializing;
+
+    public enum State
+    {
+        Initializing,
+        Title,
+        GameOver,
+        Playing
+    }
 
     private void Start()
     {
+        titleScreen = FindObjectOfType<TitleScreen>();
         gameOver = FindObjectOfType<GameOver>();
-        NewGame();
+
+        Initialize();
     }
 
     private void Update()
@@ -17,13 +30,24 @@ public class GameController : MonoBehaviour
         // TODO: make a better way to start the game that the user can see
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("new game started");
             NewGame();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Initialize();
+        }
+    }
+    
+    public void Initialize()
+    {
+        titleScreen.Activate();
+        gameOver.Deactivate();
     }
 
     public void NewGame()
     {
+        titleScreen.Deactivate();
         gameOver.Deactivate();
     }
 
