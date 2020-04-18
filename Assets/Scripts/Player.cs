@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float speed = 1;
 
     public Game game;
+    public bool alive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +18,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if (alive)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(horizontal, vertical).normalized;
-        gameObject.transform.position += direction * Time.deltaTime * speed;
-
+            Vector3 direction = new Vector3(horizontal, vertical).normalized;
+            gameObject.transform.position += direction * Time.deltaTime * speed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Fire"))
         {
             game.GameOver();
+            alive = false;
         }
     }
 }
