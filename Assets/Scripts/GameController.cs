@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public Overlay titleScreen;
     public Overlay gameOver;
 
-    public State currentState = State.Initializing;
+    public Game game;
 
     public enum State
     {
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     {
         titleScreen = FindObjectOfType<TitleScreen>();
         gameOver = FindObjectOfType<GameOver>();
-
+        game = FindObjectOfType<Game>();
         Initialize();
     }
 
@@ -43,12 +43,14 @@ public class GameController : MonoBehaviour
     {
         titleScreen.Activate();
         gameOver.Deactivate();
+        game.Initialize();
     }
 
     public void NewGame()
     {
         titleScreen.Deactivate();
         gameOver.Deactivate();
+        game.NewGame();
     }
 
     public void GameOver()
