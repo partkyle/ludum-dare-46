@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
     public GameObject heldTree;
     public Vector3 heldTreeOffset;
 
+    public Sounds sounds;
+
     // Start is called before the first frame update
     void Start()
     {
         game = FindObjectOfType<Game>();
+        sounds = FindObjectOfType<Sounds>();
     }
 
     // Update is called once per frame
@@ -42,11 +45,13 @@ public class Player : MonoBehaviour
         {
             if (heldTree == null)
             {
+                sounds.PlayBurn();
                 game.GameOver();
                 alive = false;
             }
             else
             {
+                sounds.PlayBurn();
                 game.FeedTree();
                 Destroy(heldTree);
                 heldTree = null;
@@ -56,6 +61,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Tree"))
         {
+            sounds.PlayChop();
             heldTree = collision.gameObject;
             heldTreeOffset = collision.gameObject.transform.position - transform.position;
         }
