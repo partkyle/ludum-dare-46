@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
+    public static string LOOKUP_NAME = "Overlay";
+
+    GameObject overlay;
+
+    private void Start()
+    {
+       overlay = transform.Find(LOOKUP_NAME).gameObject;
+    }
+
     public void Activate()
     {
-        gameObject.SetActive(true);
+        overlay.SetActive(true);
     }
 
     public void Deactivate()
     {
-        gameObject.SetActive(false);
+        overlay.SetActive(false);
     }
 }
