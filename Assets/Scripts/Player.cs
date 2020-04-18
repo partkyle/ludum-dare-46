@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public Game game;
     public bool alive = true;
 
+    public GameObject heldTree;
+    public Vector3 heldTreeOffset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,11 @@ public class Player : MonoBehaviour
 
             Vector3 direction = new Vector3(horizontal, vertical).normalized;
             gameObject.transform.position += direction * Time.deltaTime * speed;
+
+            if (heldTree != null)
+            {
+                heldTree.transform.position = transform.position + heldTreeOffset;
+            }
         }
     }
 
@@ -32,8 +40,24 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Fire"))
         {
-            game.GameOver();
-            alive = false;
+            if (heldTree == null)
+            {
+                game.GameOver();
+                alive = false;
+            }
+            else
+            {
+                game.FeedTree();
+                Destroy(heldTree);
+                heldTree = null;
+                heldTreeOffset = Vector3.zero;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Tree"))
+        {
+            heldTree = collision.gameObject;
+            heldTreeOffset = collision.gameObject.transform.position - transform.position;
         }
     }
 }

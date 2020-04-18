@@ -16,6 +16,8 @@ public class Game : MonoBehaviour
     public GameObject container;
     public GameObject currentPlayer;
 
+    public Vector3 playerPosition = Vector3.down * -2;
+
     public float currentTime;
 
     public bool playing = false;
@@ -25,6 +27,10 @@ public class Game : MonoBehaviour
 
     public Rect treeRect;
     public Rect forbiddenRect;
+
+    public Player player;
+
+    public float feedTreeTime = 5;
 
     void Start()
     {
@@ -74,7 +80,9 @@ public class Game : MonoBehaviour
         container.transform.parent = transform;
 
         Instantiate(floorPrefab, container.transform);
-        Instantiate(playerPrefab, container.transform);
+        GameObject playerGO = Instantiate(playerPrefab, container.transform);
+        playerGO.transform.position = playerPosition;
+        player = playerGO.GetComponent<Player>();
         Instantiate(firePrefab, container.transform);
 
         SpawnTrees();
@@ -98,6 +106,15 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void FeedTree()
+    {
+        currentTime += feedTreeTime;
+        if (currentTime > maxTime)
+        {
+            currentTime = maxTime;
+        }
+    }
+
     public void Stop()
     {
         gameUi.SetActive(false);
@@ -108,6 +125,9 @@ public class Game : MonoBehaviour
     {
         Stop();
         controller.GameOver();
-
+        if (player != null)
+        {
+            player.alive = false;
+        }
     }
 }

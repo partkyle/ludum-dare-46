@@ -403,9 +403,23 @@ MonoBehaviour:
   treePrefab: {fileID: 7831173078838763645, guid: a3bfed530b573cf48b8807c676674dc1,
     type: 3}
   container: {fileID: 0}
+  currentPlayer: {fileID: 0}
   currentTime: 0
   playing: 0
   maxTime: 5
+  numTrees: 100
+  treeRect:
+    serializedVersion: 2
+    x: -10
+    y: -5
+    width: 20
+    height: 10
+  forbiddenRect:
+    serializedVersion: 2
+    x: -4
+    y: -4
+    width: 8
+    height: 8
 --- !u!1 &382417985
 GameObject:
   m_ObjectHideFlags: 0
