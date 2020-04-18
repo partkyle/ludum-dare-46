@@ -6,10 +6,12 @@ public class Player : MonoBehaviour
 {
     public float speed = 1;
 
+    public GameController root;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        root = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
@@ -27,8 +29,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Fire"))
         {
-            Destroy(this.gameObject);
+            root.GameOver();
         }
     }
-  
 }
