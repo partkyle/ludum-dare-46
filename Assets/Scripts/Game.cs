@@ -32,6 +32,8 @@ public class Game : MonoBehaviour
 
     public float feedTreeTime = 5;
 
+    public Score score;
+
     void Start()
     {
         gameUi = FindObjectOfType<GameUI>().gameObject;
@@ -43,6 +45,9 @@ public class Game : MonoBehaviour
     {
         if (playing)
         {
+            // always add the score
+            score.Time += Time.deltaTime;
+
             currentTime -= Time.deltaTime;
             timer.current = currentTime;
 
@@ -75,6 +80,8 @@ public class Game : MonoBehaviour
         {
             Destroy(container);
         }
+
+        score = new Score();
 
         container = new GameObject("Container");
         container.transform.parent = transform;
@@ -113,6 +120,8 @@ public class Game : MonoBehaviour
         {
             currentTime = maxTime;
         }
+
+        score.Trees += 1;
     }
 
     public void Stop()
@@ -124,7 +133,7 @@ public class Game : MonoBehaviour
     public void GameOver()
     {
         Stop();
-        controller.GameOver();
+        controller.GameOver(score);
         if (player != null)
         {
             player.alive = false;

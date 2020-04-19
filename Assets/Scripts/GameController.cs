@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public Overlay titleScreen;
-    public Overlay gameOver;
+    public GameOver gameOver;
 
     public Game game;
 
@@ -53,8 +53,9 @@ public class GameController : MonoBehaviour
         game.NewGame();
     }
 
-    public void GameOver()
+    public void GameOver(Score score)
     {
         gameOver.Activate();
+        gameOver.SetScore(score);
     }
 }
