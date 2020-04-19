@@ -13,6 +13,13 @@ public class Overlay : MonoBehaviour
        overlay = transform.Find(LOOKUP_NAME).gameObject;
     }
 
+    public bool Active { 
+        get
+        {
+            return overlay.activeSelf;
+        }
+    }
+
     public void Activate()
     {
         overlay.SetActive(true);

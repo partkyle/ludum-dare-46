@@ -35,7 +35,14 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Initialize();
+            if (titleScreen.Active)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                Initialize();
+            }
         }
     }
     

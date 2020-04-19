@@ -1850,7 +1850,10 @@ MonoBehaviour:
 
     Esc   Exit to title
 
-    WASD  Move Player'
+    Esc   Exit (on title)
+
+    WASD 
+    Move Player'
 --- !u!222 &1861569637
 CanvasRenderer:
   m_ObjectHideFlags: 0
